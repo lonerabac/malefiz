@@ -1,0 +1,86 @@
+.board {
+    border-collapse: collapse;
+    margin: auto;
+}
+.dice{
+    min-width: 1em;
+    font-size: 1.5em;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+td {
+    border: 1px solid black;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 1.5em;
+}
+
+.board td :hover{
+    cursor: default;
+}
+
+.playable {
+    background-color: #ddd;
+}
+
+.notplayable {
+    border: none
+}
+
+.occupying1, .notplayable.house.occupying1 {
+    border: 1px solid black;
+    background-color: red;
+    color: white;
+}
+
+.occupying2, .notplayable.house.occupying2 {
+    border: 1px solid black;
+    background-color: green;
+    color: white;
+}
+
+.occupying3, .notplayable.house.occupying3 {
+    background-color: yellow;
+    border: 1px solid black;
+}
+
+.occupying4, .notplayable.house.occupying4 {
+    background-color: blue;
+    border: 1px solid black;
+    color: white;
+}
+
+.occupying5 {
+    border: 1px solid black;
+    background-color: black;
+}
+
+.reachable1 {
+    background-color: #f88;
+}
+
+.reachable2 {
+    background-color: #8f8;
+}
+
+.reachable3 {
+    background-color: #ff8;
+}
+
+.reachable4 {
+    background-color: #88f;
+}
+
+.moving {
+    border-radius: 50%; 
+}
+.boardnotation input{
+    width:90%;
+}
+
+.playable.occupying0.movingwall:hover{
+    background-color: gray;
+}

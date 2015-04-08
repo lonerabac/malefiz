@@ -63,11 +63,11 @@ var Board = function (paramGame, notation, NotationUtils) {
             squaresIndex++;
         }
     };
-    m.allSquaresFunction = function (func, params){
+    m.allSquaresFunction = function (func){
          for (var i = 0; i < m.rows.length; i++) {
             var row = m.rows[i];
             for (var j = 0; j < row.length; j++) {
-                func(row[j], params);
+                func(row[j]);
             }
         }
     };
@@ -81,17 +81,6 @@ var Board = function (paramGame, notation, NotationUtils) {
                 }
             }
         });
-//        for (var i = 0; i < m.rows.length; i++) {
-//            var row = m.rows[i];
-//            for (var j = 0; j < row.length; j++) {
-//                var sq = row[j];
-//                if (sq.occupying !== 0) {
-//                    for (var z = 0; z < sq.numOccupying; z++) {
-//                        p[sq.occupying - 1].push(sq.notation);
-//                    }
-//                }
-//            }
-//        }
 
         return p[0].join("") + p[1].join("") + p[2].join("") + p[3].join("") + p[4].join("");
     };

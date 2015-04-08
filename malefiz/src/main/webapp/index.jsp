@@ -18,7 +18,12 @@
         <div ng-app="app">
             <div ng-controller= "MalefizCtrl as mlfz">
                 <div class = "dice" ng-class="'occupying' + mlfz.game.playerTurn">
+                <span ng-hide="mlfz.game.cantmove">
                     {{mlfz.game.winner===null?(mlfz.game.movingWall?' Set a wall':' Move '+mlfz.game.moves+' squares'):'Player '+mlfz.game.playerTurn+' wins!'}}
+                </span>
+                <span ng-if="mlfz.game.cantmove">
+                    Player {{mlfz.game.playerTurn}} can't move {{mlfz.game.moves}} squares <button ng-click="mlfz.game.changeTurn()">Next player</button>
+                </span>
                 </div>
                 <table class ="board">
                     <tr ng-repeat="row in mlfz.game.board.rows">

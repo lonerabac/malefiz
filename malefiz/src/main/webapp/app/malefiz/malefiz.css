@@ -84,3 +84,6 @@ td {
 .playable.occupying0.movingwall:hover{
     background-color: gray;
 }
+button{
+	vertical-align: middle;
+}

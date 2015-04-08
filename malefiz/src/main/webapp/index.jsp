@@ -40,6 +40,13 @@
                         </td>
                     </tr>
                 </table>
+                <br>
+                <% if (request.getParameter("d") != null){%>
+                <div class ="boardnotation">
+                    <input ng-model="mlfz.game.notation" type="text"/>
+                    <button ng-click="mlfz.setGame()">Apply</button>
+                </div>
+                <%} %>
             </div>
         </div>
     </body>

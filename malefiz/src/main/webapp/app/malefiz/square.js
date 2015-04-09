@@ -97,12 +97,7 @@ var Square = function (paramGame, paramNotation, NotationUtils) {
             return m.playable && (m.game.moving.occupying !== 5 || m.occupying === 0) && m.occupying !== m.game.moving.occupying;
         }
     }
-    function setWallTaken() {
-        m.game.movingWall = true;
-        m.game.moving = {occupying: 5, isHouse: function () {
-                return false;
-            }};
-    }
+
     function checkWin() {
         if (m.occupying !== 5 && m.notation === "i14") {
             m.game.setWinner();
@@ -113,7 +108,7 @@ var Square = function (paramGame, paramNotation, NotationUtils) {
     function putTakenPawnOnSquare(prevOccupying) {
         if (prevOccupying === 5) {
             if (!checkWin()) {
-                setWallTaken();
+                m.game.setWallTaken();
             }
         } else {
             m.game.movingWall = false;
@@ -152,7 +147,7 @@ var Square = function (paramGame, paramNotation, NotationUtils) {
                 removeTakenPawnFromOldSquare();
                 putTakenPawnOnSquare(prevOccupying);
             }
-            m.game.notation = m.game.board.getNotation();
+            m.game.notation = m.game.getNotation();
         }
     };
 };

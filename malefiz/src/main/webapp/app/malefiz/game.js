@@ -8,13 +8,32 @@ var Game = function (NotationUtils) {
     m.board;
     m.winner = null;
     m.cantmove = false;
-    m.notation = "x1x1x1x1x1x2x2x2x2x2x3x3x3x3x3x4x4x4x4x4i13i9-11g7k7a3e3i3m3q3";
+    m.notation = "1"+m.moves+"x1x1x1x1x1x2x2x2x2x2x3x3x3x3x3x4x4x4x4x4i13i9-11g7k7a3e3i3m3q3";
 
     m.setFromNotation = function () {
-        m.board = new Board(m, m.notation, NotationUtils);
+    	m.playerTurn = parseInt(m.notation.charAt(0));
+    	var charAt1 = m.notation.charAt(1);
+    	if (charAt1==="w"){
+    		m.setWallTaken();
+    	} else {
+    		m.movingWall = false;
+    		m.moves = parseInt(charAt1);
+    	}
+        m.board = new Board(m, m.notation.substring(2), NotationUtils);
     };
+    
+    m.setWallTaken = function() {
+        m.movingWall = true;
+        m.moving = {occupying: 5, isHouse: function () {
+                return false;
+            }};
+    }
 
     m.setFromNotation();
+    
+    m.getNotation = function(){
+    	return m.playerTurn +""+ (m.movingWall?"w":m.moves) + m.board.getNotation();
+    }
     
     function cantMove(player, numMoves){
     	var sqPawns = getPlayerSquarePawns(player);

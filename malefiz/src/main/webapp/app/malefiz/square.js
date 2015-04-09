@@ -132,15 +132,11 @@ var Square = function (paramGame, paramNotation, NotationUtils) {
     }
     function removeTakenPawnFromOldSquare() {
         m.game.moving.moving = false;
-        if (m.game.moving.isHouse()) {
-            m.game.moving.numOccupying--;
-            if (m.game.moving.numOccupying === 0) {
-                m.game.moving.occupying = 0;
-            }
-        } else {
-            m.game.moving.occupying = 0;
-        }
-        m.game.moving = null;
+        m.game.moving.numOccupying--;
+        if (!m.game.moving.isHouse() || m.game.moving.numOccupying === 0) {
+        	m.game.moving.occupying = 0;
+		}
+		m.game.moving = null;
     }
     m.click = function () {
         if (m.game.winner === null) {

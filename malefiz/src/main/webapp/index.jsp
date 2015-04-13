@@ -28,6 +28,7 @@
                 <table class ="board">
                     <tr ng-repeat="row in mlfz.game.board.rows">
                         <td ng-repeat="square in row track by $index"
+                        	class="square"
                             ng-class="[
                                         square.coord[0]!==13 && mlfz.game.movingWall?'movingwall':'',
                                         square.reachable?'reachable'+mlfz.game.playerTurn:'',
@@ -38,9 +39,11 @@
                                         square.notation === 'x2'?'occupying2':'',
                                         square.notation === 'x3'?'occupying3':'',
                                         square.notation === 'x4'?'occupying4':'',
+                                        square.occupying>0 && square.occupying<5?'occupyingPlayer':'',
                                         'occupying'+square.occupying
                                         ]"
                             ng-click="square.click()">
+                            <div ng-if="!square.isHouse() && square.occupying>0 && square.occupying<=5"></div>
                             <span ng-if="square.isHouse()">{{square.numOccupying}} </span>
                         </td>
                     </tr>

@@ -29,32 +29,34 @@ td {
 .notplayable {
     border: none
 }
-
-.occupying1, .notplayable.house.occupying1 {
-    border: 1px solid black;
+.moving.occupying1, .occupying1 div, .notplayable.house.occupying1, .dice.occupying1 {
     background-color: red;
     color: white;
 }
 
-.occupying2, .notplayable.house.occupying2 {
-    border: 1px solid black;
+.moving.occupying2, .occupying2 div, .notplayable.house.occupying2, .dice.occupying2 {
     background-color: green;
     color: white;
 }
 
-.occupying3, .notplayable.house.occupying3 {
+.moving.occupying3, .occupying3 div, .notplayable.house.occupying3, .dice.occupying3 {
     background-color: yellow;
-    border: 1px solid black;
 }
 
-.occupying4, .notplayable.house.occupying4 {
+.moving.occupying4, .occupying4 div, .notplayable.house.occupying4, .dice.occupying4 {
     background-color: blue;
-    border: 1px solid black;
     color: white;
 }
-
-.occupying5 {
-    border: 1px solid black;
+.moving div{
+	border: 1px solid black;
+}
+.notplayable.house{
+	border: 1px solid black;
+}
+.occupyingPlayer div{
+   border-radius: 50%; 
+}
+.occupying5 div{
     background-color: black;
 }
 
@@ -73,10 +75,14 @@ td {
 .reachable4 {
     background-color: #88f;
 }
-
-.moving {
-    border-radius: 50%; 
+.square{
+	padding:4px;
 }
+.square div{
+	width:100%;
+	height:100%;
+}
+
 .boardnotation input{
     width:90%;
 }

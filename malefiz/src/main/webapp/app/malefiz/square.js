@@ -5,9 +5,21 @@ var Square = function (paramGame, paramNotation, NotationUtils) {
     m.coord = NotationUtils.toCoord(m.notation)[0];
     m.playable = false;
     m.occupying = 0;
+    m.playerSetWall = 0;
+    m.prevOccupying = 0;
     m.numOccupying = 0;
+    m.lastMoved = false;
     m.moving = false;
     m.reachable = false;
+    m.isOccupied = function(){
+    	return m.occupying > 0 && m.occupying<=5;
+    }
+    m.isOccupyingPlayer = function(){
+    	return m.occupying > 0 && m.occupying<5;
+    }
+    m.isPrevOccupyingPlayer = function(){
+    	return m.prevOccupying > 0 && m.prevOccupying<5;
+    }
     m.isHouse = function () {
         return m.notation.charAt(0) === "x";
     };
@@ -108,6 +120,7 @@ var Square = function (paramGame, paramNotation, NotationUtils) {
     function putTakenPawnOnSquare(prevOccupying) {
         if (prevOccupying === 5) {
             if (!checkWin()) {
+            	m.playerSetWall = 0;
                 m.game.setWallTaken();
             }
         } else {
@@ -128,6 +141,20 @@ var Square = function (paramGame, paramNotation, NotationUtils) {
     function removeTakenPawnFromOldSquare() {
         m.game.moving.moving = false;
         m.game.moving.numOccupying--;
+        if (m.game.lastSquareLeft[m.game.moving.occupying - 1]){
+        	m.game.lastSquareLeft[m.game.moving.occupying - 1].prevOccupying = 0;
+        }
+        m.game.moving.prevOccupying = m.game.moving.occupying;
+        m.game.lastSquareLeft[m.game.moving.occupying - 1] = m.game.moving;
+        if (m.game.moving.occupying === 5){
+        	m.playerSetWall = m.game.playerTurn;
+        } else {
+        	 if (m.game.lastPawnMoved[m.game.moving.occupying - 1]){
+             	m.game.lastPawnMoved[m.game.moving.occupying - 1].lastMoved = false;
+             }
+             m.lastMoved = true;
+             m.game.lastPawnMoved[m.game.moving.occupying - 1] = m;
+        }
         if (!m.game.moving.isHouse() || m.game.moving.numOccupying === 0) {
         	m.game.moving.occupying = 0;
 		}

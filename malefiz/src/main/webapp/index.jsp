@@ -39,11 +39,15 @@
                                         square.notation === 'x2'?'occupying2':'',
                                         square.notation === 'x3'?'occupying3':'',
                                         square.notation === 'x4'?'occupying4':'',
-                                        square.occupying>0 && square.occupying<5?'occupyingPlayer':'',
-                                        'occupying'+square.occupying
+                                        square.isOccupyingPlayer()?'occupyingPlayer':'',
+                                        square.isPrevOccupyingPlayer()?'prevOccupyingPlayer':'',
+                                        'occupying'+square.occupying,
+                                        'prevOccupying'+square.prevOccupying,
+                                        'playerSetWall'+square.playerSetWall,
+                                        square.lastMoved?'lastMoved':''
                                         ]"
                             ng-click="square.click()">
-                            <div ng-if="!square.isHouse() && square.occupying>0 && square.occupying<=5"></div>
+                            <div ng-if="!square.isHouse() && (square.isOccupied() || square.isPrevOccupyingPlayer())"></div>
                             <span ng-if="square.isHouse()">{{square.numOccupying}} </span>
                         </td>
                     </tr>

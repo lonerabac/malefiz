@@ -29,21 +29,21 @@ td {
 .notplayable {
     border: none
 }
-.moving.occupying1, .occupying1 div, .notplayable.house.occupying1, .dice.occupying1 {
+.square.occupying1 div, .notplayable.house.occupying1, .dice.occupying1 {
     background-color: red;
     color: white;
 }
 
-.moving.occupying2, .occupying2 div, .notplayable.house.occupying2, .dice.occupying2 {
+.square.occupying2 div, .notplayable.house.occupying2, .dice.occupying2 {
     background-color: green;
     color: white;
 }
 
-.moving.occupying3, .occupying3 div, .notplayable.house.occupying3, .dice.occupying3 {
+ .square.occupying3 div, .notplayable.house.occupying3, .dice.occupying3 {
     background-color: yellow;
 }
 
-.moving.occupying4, .occupying4 div, .notplayable.house.occupying4, .dice.occupying4 {
+.square.occupying4 div, .notplayable.house.occupying4, .dice.occupying4 {
     background-color: blue;
     color: white;
 }
@@ -68,26 +68,29 @@ td {
 .notplayable.house{
 	border: 1px solid black;
 }
-.occupyingPlayer div{
+.prevOccupyingPlayer div, .occupyingPlayer div{
    border-radius: 50%; 
 }
-.occupying5 div{
+.square.occupying5 div{
     background-color: black;
+    border-radius: 0%; 
 }
-
-.reachable1 {
+.square.lastMoved div{
+	border: 1px solid black;
+}
+.moving.occupying1, .reachable1, .prevOccupying1 div, .square.house.prevOccupying1, .playerSetWall1 {
     background-color: #f88;
 }
 
-.reachable2 {
+.moving.occupying2, .reachable2, .prevOccupying2 div, .square.house.prevOccupying2, .playerSetWall2 {
     background-color: #8f8;
 }
 
-.reachable3 {
+.moving.occupying3, .reachable3, .prevOccupying3 div, .square.house.prevOccupying3, .playerSetWall3 {
     background-color: #ff8;
 }
 
-.reachable4 {
+.moving.occupying4, .reachable4, .prevOccupying4 div, .square.house.prevOccupying4, .playerSetWall4 {
     background-color: #88f;
 }
 .square{

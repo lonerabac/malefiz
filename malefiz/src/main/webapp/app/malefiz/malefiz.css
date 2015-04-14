@@ -47,6 +47,21 @@ td {
     background-color: blue;
     color: white;
 }
+.moving.notplayable.house.occupying1 {
+    background-color: #800003;
+}
+
+.moving.notplayable.house.occupying2 {
+    background-color: #004f00;
+}
+
+.moving.notplayable.house.occupying3 {
+    background-color: #bfbf00;
+}
+
+.moving.notplayable.house.occupying4 {
+    background-color: #00006c;
+}
 .moving div{
 	border: 1px solid black;
 }

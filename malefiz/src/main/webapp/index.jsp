@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="app/malefiz/malefiz.css"/>
 
         <script src="app/malefiz/notationUtils.js"></script>
+        <script src="app/malefiz/ia.js"></script>
         <script src="app/malefiz/game.js"></script>
         <script src="app/malefiz/board.js"></script>
         <script src="app/malefiz/square.js"></script>

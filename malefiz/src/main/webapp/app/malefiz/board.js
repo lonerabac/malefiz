@@ -72,18 +72,23 @@ var Board = function (paramGame, notation, NotationUtils) {
         }
     };
     m.getNotation = function () {
-        var p = [[], [], [], [], []];
-
-        m.allSquaresFunction(function (sq) {
-            if (sq.occupying !== 0) {
-                for (var z = 0; z < sq.numOccupying; z++) {
-                    p[sq.occupying - 1].push(sq.notation);
-                }
-            }
-        });
+        var p = m.getPlayersAndWallsSquares();
 
         return p[0].join("") + p[1].join("") + p[2].join("") + p[3].join("") + p[4].join("");
     };
+    
+    m.getPlayersAndWallsSquares = function (){
+    	 var p = [[], [], [], [], []];
+
+         m.allSquaresFunction(function (sq) {
+             if (sq.occupying !== 0) {
+                 for (var z = 0; z < sq.numOccupying; z++) {
+                     p[sq.occupying - 1].push(sq.notation);
+                 }
+             }
+         });
+         return p;
+    }
     m.init(notation);
 };
 

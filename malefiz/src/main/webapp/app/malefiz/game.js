@@ -11,6 +11,7 @@ var Game = function (NotationUtils) {
     m.notation = "1"+m.moves+"x1x1x1x1x1x2x2x2x2x2x3x3x3x3x3x4x4x4x4x4i13i9-11g7k7a3e3i3m3q3";
     m.lastSquareLeft = [];
     m.lastPawnMoved = [];
+    m.players = [null, new IA(2, m), null, new IA(4, m)];
 
     m.setFromNotation = function () {
     	m.playerTurn = parseInt(m.notation.charAt(0));
@@ -51,6 +52,7 @@ var Game = function (NotationUtils) {
     
     m.changeTurn = function(){
         if (m.rules){
+        	var playerIA = null;
         	m.playerTurn = m.playerTurn % 4 + 1;
         	m.board.allSquaresFunction(function(sq) {
         		if (sq.playerSetWall === m.playerTurn){
@@ -59,6 +61,10 @@ var Game = function (NotationUtils) {
         	});
             m.moves = rollDice();
             m.cantmove = cantMove(m.playerTurn, m.moves);
+            playerIA = m.players[m.playerTurn-1];
+            if (playerIA!== null){
+            	playerIA.play();
+            }
         } 
     };
     

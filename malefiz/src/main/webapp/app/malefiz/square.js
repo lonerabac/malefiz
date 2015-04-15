@@ -33,26 +33,35 @@ var Square = function (paramGame, paramNotation, NotationUtils) {
         } else if (m.occupying !== 5) {
             var adj = adjacentSquares();
             for (var i = 0; i < adj.length; i++) {
-                if (adj[i] !== undefined && adj[i] !== previous && adj[i].playable) {
+                if (adj[i] !== previous) {
                     reachable = reachable.concat(adj[i].reachableSquares(numMoves - 1, player, m));
                 }
             }
         }
         return reachable;
     };
+    
+    function pushIfPlayable(array, coord1, coord2){
+    	var sq = m.game.board.rows[coord1][coord2];
+    	if (sq.playable){
+    		array.push(sq);
+    	}
+    }
+    
     function adjacentSquares() {
         var adj = [];
+        var sq = null;
         if (m.coord[0] > 0) {
-            adj.push(m.game.board.rows[m.coord[0] - 1][m.coord[1]]);
+        	pushIfPlayable(adj, m.coord[0] - 1, m.coord[1]);
         }
         if (m.coord[1] > 0) {
-            adj.push(m.game.board.rows[m.coord[0]][m.coord[1] - 1]);
+        	pushIfPlayable(adj, m.coord[0], m.coord[1] - 1);
         }
         if (m.coord[0] < m.game.board.rows.length - 1) {
-            adj.push(m.game.board.rows[m.coord[0] + 1][m.coord[1]]);
+        	pushIfPlayable(adj, m.coord[0] + 1, m.coord[1]);
         }
         if (m.coord[1] < m.game.board.rows[0].length - 1) {
-            adj.push(m.game.board.rows[m.coord[0]][m.coord[1] + 1]);
+        	pushIfPlayable(adj, m.coord[0], m.coord[1] + 1);
         }
         return adj;
     }

@@ -2,8 +2,8 @@ var IA = function(player, game){
 	var m = this;
 	m.player = player;
 	m.game = game;
-	function getBestMoveFromSq(sq, player, moves){
-		var options = sq.reachableSquares(moves, player, sq, true);
+	function getBestMoveFromSq(sq, player, moves, wallsblock){
+		var options = sq.reachableSquares(moves, player, sq, wallsblock);
 		var best = null;
 		if (options.length !== 0){
 			for (var i = 0; i < options.length; i++){
@@ -19,7 +19,7 @@ var IA = function(player, game){
 		var best = null;
 		for (var i = 0; i < pawnsNot.length; i++){
 			var pawn = m.game.board.getSq(pawnsNot[i]);
-			var bestMovePawn = getBestMoveFromSq(pawn, pawn.occupying, m.game.moves);
+			var bestMovePawn = getBestMoveFromSq(pawn, pawn.occupying, m.game.moves, true);
 			if (bestMovePawn !== null && (best === null || bestMovePawn[2] > best[2])){
 				best = bestMovePawn;
 			}	
@@ -35,41 +35,52 @@ var IA = function(player, game){
 			bestMove[0].click();
 			bestMove[1].click();
 			if (m.game.playerTurn === m.player){
+				var bestPlace = null;
+				var places;
 				var squaresToWall = otherPlayerPawnsOrdered(p);
 				if (m.game.board.getSq(squaresToWall[0]).coord[0]===13){
 					if (m.player < 3 ){
-						squaresToWall = ["n5", "l5", "p3", "n3"];
+						places = ["m3", "m5", "o3", "k3", "k5"];
 					} else {
-						squaresToWall = ["d5", "f5", "b3", "d3"];
+						places = ["e3", "e5", "c3", "g3", "g5"];
 					}
+					var i = 0;
+					while (bestPlace=== null && i < places.length){
+						var sq = m.game.board.getSq(places[i]);
+						if (!sq.isOccupied()){
+							bestPlace = sq;
+						}
+						i++;
+					}
+					
 				}
-				var place = null;
 				var i = 0;
-				while (place === null && i < squaresToWall.length){
+				while (bestPlace === null && i < squaresToWall.length){
 					var sq = m.game.board.getSq(squaresToWall[i]);
-					place = wallBefore(sq, sq.occupying, 1, 3);
+					bestPlace = wallBefore(sq, sq.occupying, 1, 2);
 					i++;
 				}
-				if (place === null){
+				if (bestPlace === null){
 					m.game.board.allSquaresFunction(function(sq) {
 						if (sq.playable && !sq.isOccupied()
 								&& sq.coord[0] !== 13) {
-							place = sq;
+							bestPlace = sq;
 						}
 					});
 				}
-				place.click();
+				bestPlace.click();
 				
 			}
 			
 		}
 	}
+	
 	function wallBefore(sq, player, numBefore, limit){
 		var place = null;
 		if (numBefore <= limit){
-			var bestMoveOne = getBestMoveFromSq(sq, player, 1);
-			if (bestMoveOne !== null){
-				if (bestMoveOne[1].isOccupied() || bestMoveOne[1].coord[0]===13){
+			var bestMoveOne = getBestMoveFromSq(sq, player, 1, false);
+			if (bestMoveOne !== null && bestMoveOne[1].occupying !== m.player && bestMoveOne[2]>0){
+				if (bestMoveOne[1].isOccupied()){
 					place = wallBefore(bestMoveOne[1], player, numBefore + 1, limit);
 				} else if (bestMoveOne[1].notation !=="i14"){
 					place = bestMoveOne[1];

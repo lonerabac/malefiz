@@ -21,13 +21,17 @@ var Board = function (paramGame, notation, NotationUtils) {
         }
         return squares;
     };
+    
+    m.getSq = function (notation){
+    	return m.getSquares(notation)[0];
+    }
 
     m.initEmptyGrid = function (cols, rows) {
         m.rows = [];
         for (var i = 0; i < rows; i++) {
             var row = [];
             for (var j = 0; j < cols; j++) {
-                row.push(new Square(m.game, NotationUtils.toNotation(i, j), NotationUtils));
+                row.push(new Square(m, NotationUtils.toNotation(i, j), NotationUtils));
             }
             m.rows.push(row);
         }
@@ -38,6 +42,11 @@ var Board = function (paramGame, notation, NotationUtils) {
         for (var i = 0; i < playables.length; i++) {
             playables[i].playable = true;
         }
+        var playablesAndHouses = m.getSquares("x1x2x3x4").concat(playables);
+        for (var i = 0; i < playablesAndHouses.length; i++) {
+        	playablesAndHouses[i].distanceToWin = playablesAndHouses[i].distanceToWin(false);
+        }
+       
     };
 
     m.initEmpty = function () {

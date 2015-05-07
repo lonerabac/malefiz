@@ -23,6 +23,7 @@ var Game = function (NotationUtils) {
     		m.moves = parseInt(charAt1);
     	}
         m.board = new Board(m, m.notation.substring(2), NotationUtils);
+        startTurn();
     };
     
     m.setWallTaken = function() {
@@ -50,6 +51,14 @@ var Game = function (NotationUtils) {
     	
     };
     
+    function startTurn(){
+    	m.cantmove = cantMove(m.playerTurn, m.moves);
+        playerIA = m.players[m.playerTurn-1];
+        if (playerIA!== null){
+        	playerIA.play();
+        }
+    }
+    
     m.changeTurn = function(){
         if (m.rules){
         	var playerIA = null;
@@ -60,11 +69,7 @@ var Game = function (NotationUtils) {
         		}
         	});
             m.moves = rollDice();
-            m.cantmove = cantMove(m.playerTurn, m.moves);
-            playerIA = m.players[m.playerTurn-1];
-            if (playerIA!== null){
-            	playerIA.play();
-            }
+            startTurn();
         } 
     };
     

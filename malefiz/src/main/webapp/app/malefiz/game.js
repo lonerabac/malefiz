@@ -53,7 +53,7 @@ var Game = function (NotationUtils) {
     
     function startTurn(){
     	m.cantmove = cantMove(m.playerTurn, m.moves);
-        playerIA = m.players[m.playerTurn-1];
+        var playerIA = m.players[m.playerTurn-1];
         if (playerIA!== null){
         	playerIA.play();
         }
@@ -61,7 +61,6 @@ var Game = function (NotationUtils) {
     
     m.changeTurn = function(){
         if (m.rules){
-        	var playerIA = null;
         	m.playerTurn = m.playerTurn % 4 + 1;
         	m.board.allSquaresFunction(function(sq) {
         		if (sq.playerSetWall === m.playerTurn){

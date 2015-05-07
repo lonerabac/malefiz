@@ -78,19 +78,19 @@ td {
 .square.lastMoved div{
 	border: 1px solid black;
 }
-.moving.occupying1, .reachable1, .prevOccupying1 div, .square.house.prevOccupying1, .playerSetWall1 {
+.moving.occupying1, .square.reachable1, .playerSetWall1 {
     background-color: #f88;
 }
 
-.moving.occupying2, .reachable2, .prevOccupying2 div, .square.house.prevOccupying2, .playerSetWall2 {
+.moving.occupying2, .square.reachable2, .playerSetWall2 {
     background-color: #8f8;
 }
 
-.moving.occupying3, .reachable3, .prevOccupying3 div, .square.house.prevOccupying3, .playerSetWall3 {
+.moving.occupying3, .square.reachable3, .playerSetWall3 {
     background-color: #ff8;
 }
 
-.moving.occupying4, .reachable4, .prevOccupying4 div, .square.house.prevOccupying4, .playerSetWall4 {
+.moving.occupying4, .square.reachable4, .playerSetWall4 {
     background-color: #88f;
 }
 .square{

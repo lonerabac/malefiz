@@ -7,7 +7,7 @@ var IA = function(player, game){
 		var best = null;
 		if (options.length !== 0){
 			for (var i = 0; i < options.length; i++){
-				var advance = sq.distanceToWin - options[i].distanceToWin;
+				var advance = sq.getDistanceToWin(false) - options[i].getDistanceToWin(false);
 				if (best === null || advance > best[2]){
 					best = [sq, options[i], advance];
 				}
@@ -95,7 +95,7 @@ var IA = function(player, game){
 			if (m.player!== i+1){
 				for (var j = 0; j < playerAndWallsSquares[i].length; j++){
 					var pawn = m.game.board.getSq(playerAndWallsSquares[i][j]);
-					if (mostAdvanced === null || mostAdvanced.distanceToWin > pawn.distanceToWin){
+					if (mostAdvanced === null || mostAdvanced.getDistanceToWin(false) > pawn.getDistanceToWin(false)){
 						mostAdvanced = pawn;
 					}
 				}
@@ -120,7 +120,7 @@ var IA = function(player, game){
 	}
 	
 	function compareAdvance (sq1, sq2){
-		return sq1.distanceToWin - sq2.distanceToWin;
+		return sq1.getDistanceToWin(false) - sq2.getDistanceToWin(false);
 	}
 	
 }

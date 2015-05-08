@@ -53,8 +53,12 @@ var Square = function (paramBoard, paramNotation, NotationUtils) {
     	return i;
     }
     
-    m.distanceToWin = function (wallsblock){
-    	return m.distance(m.board.getSq("i14"), wallsblock);
+    m.getDistanceToWin = function (wallsblock){
+    	if (!wallsblock && m.distanceToWin !== null){
+    		return m.distanceToWin;
+    	} else {
+    		return m.distance(m.board.getSq("i14"), wallsblock);
+    	}
     }
     
     m.path = function (path, dest, wallsblock, cangodown){

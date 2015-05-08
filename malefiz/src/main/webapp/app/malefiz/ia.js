@@ -88,12 +88,6 @@ var IA = function(player, game){
 			}
 		}
 		return place;
-		
-		
-//		var adj = sq.adjacentSquares();
-//		for (var i = 0; i< adj.length; i++){
-//			if(!adj[i].isOcupied())
-//		}
 	}
 	function mostAdvancedOtherPlayer(playerAndWallsSquares){
 		var mostAdvanced = null;
